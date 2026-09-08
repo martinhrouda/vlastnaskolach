@@ -1,0 +1,238 @@
+/* Vlast na školách — design systém
+   Barvy a typografie podle brand manuálu (červenec 2026) */
+
+:root {
+  --indigo: #190881;
+  --red: #d80300;
+  --green: #16532e;
+  --yellow: #f4b200;
+  --orange: #ff8e09;
+  --paper: #ffffff;
+  --ink: #12123a;
+  --muted: #5a5a78;
+  --line: #e2e2ec;
+
+  --display: "Jost", "Helvetica Neue", Arial, sans-serif;
+  --text: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+
+  --pad: clamp(1.25rem, 5vw, 5rem);
+  --max: 1180px;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--text);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+
+a { color: var(--indigo); }
+
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--pad); }
+
+/* ---------- typografie ---------- */
+
+h1, h2, h3 {
+  font-family: var(--display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  margin: 0 0 .6em;
+  color: var(--indigo);
+}
+
+h1 { font-size: clamp(2.6rem, 7vw, 5.2rem); }
+h2 { font-size: clamp(1.9rem, 4vw, 3rem); }
+h3 { font-size: 1.15rem; letter-spacing: -0.01em; }
+
+.lead { font-size: clamp(1.05rem, 1.8vw, 1.3rem); color: var(--indigo); font-weight: 500; }
+
+.kicker {
+  font-family: var(--display);
+  font-size: .82rem;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin: 0 0 1.2rem;
+}
+
+/* ---------- hlavička ---------- */
+
+header {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(255,255,255,.94);
+  backdrop-filter: blur(8px);
+  border-bottom: 2px solid var(--indigo);
+}
+
+.bar {
+  max-width: var(--max); margin: 0 auto; padding: .85rem var(--pad);
+  display: flex; align-items: center; justify-content: space-between; gap: 1.5rem;
+}
+
+.bar img { height: 34px; width: auto; }
+
+nav { display: flex; align-items: center; gap: 1.6rem; }
+
+nav a {
+  font-family: var(--display); font-weight: 500; font-size: .98rem;
+  color: var(--indigo); text-decoration: none;
+}
+
+nav a:hover { color: var(--red); }
+
+.nav-links { display: flex; gap: 1.6rem; }
+
+/* ---------- tlačítka ---------- */
+
+.btn {
+  display: inline-block;
+  font-family: var(--display); font-weight: 600; font-size: 1rem;
+  background: var(--red); color: #fff; text-decoration: none;
+  padding: .8rem 1.6rem; border: 2px solid var(--red);
+  transition: background .15s, color .15s;
+}
+
+.btn:hover { background: var(--indigo); border-color: var(--indigo); color: #fff; }
+
+.btn-ghost { background: transparent; color: var(--indigo); border-color: var(--indigo); }
+.btn-ghost:hover { background: var(--indigo); color: #fff; }
+
+/* ---------- sekce ---------- */
+
+section { padding: clamp(3.5rem, 8vw, 7rem) 0; }
+
+section + section { border-top: 1px solid var(--line); }
+
+.section-indigo { background: var(--indigo); color: #fff; border-top: none; }
+.section-indigo h2, .section-indigo h3, .section-indigo .lead { color: #fff; }
+.section-indigo .kicker { color: var(--yellow); }
+.section-indigo a { color: #fff; }
+
+/* ---------- hero ---------- */
+
+.hero { padding-top: clamp(3rem, 7vw, 5.5rem); padding-bottom: clamp(3rem, 7vw, 5.5rem); }
+
+.hero h1 { max-width: 15ch; }
+.hero h1 em { font-style: normal; color: var(--red); }
+
+.hero p { max-width: 52ch; font-size: clamp(1.05rem, 1.8vw, 1.28rem); color: var(--muted); }
+
+.hero-actions { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 2rem; }
+
+/* geometrie — bauhausový pruh */
+.shapes { display: flex; align-items: flex-end; gap: .75rem; margin-bottom: 2.5rem; height: 64px; }
+.shapes span { display: block; }
+.sq-red { width: 64px; height: 64px; background: var(--red); }
+.ci-indigo { width: 64px; height: 64px; border-radius: 50%; background: var(--indigo); }
+.re-yellow { width: 96px; height: 32px; background: var(--yellow); }
+.ci-green { width: 40px; height: 40px; border-radius: 50%; background: var(--green); }
+
+/* ---------- fakta ---------- */
+
+.facts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+.fact { background: var(--paper); padding: 1.6rem 1.4rem; }
+.fact b { display: block; font-family: var(--display); font-size: 2.1rem; font-weight: 700; color: var(--indigo); line-height: 1; }
+.fact span { display: block; margin-top: .5rem; font-size: .9rem; color: var(--muted); }
+
+/* ---------- mřížky ---------- */
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 4.5rem); align-items: start; }
+
+.topics { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+
+.topic { border-top: 4px solid var(--red); padding-top: 1.2rem; }
+.topic .num { font-family: var(--display); font-size: .8rem; font-weight: 700; letter-spacing: .1em; color: var(--red); }
+.topic h3 { margin: .4rem 0 .5rem; }
+.topic p { margin: 0; font-size: .95rem; color: var(--muted); }
+
+.section-indigo .topic { border-top-color: var(--yellow); }
+.section-indigo .topic .num { color: var(--yellow); }
+.section-indigo .topic p { color: rgba(255,255,255,.82); }
+
+/* ---------- průběh ---------- */
+
+.steps { counter-reset: s; margin-top: 2.5rem; display: grid; gap: 0; }
+.step { counter-increment: s; display: grid; grid-template-columns: 3.5rem 1fr; gap: 1.5rem; padding: 1.5rem 0; border-top: 1px solid var(--line); }
+.step:last-child { border-bottom: 1px solid var(--line); }
+.step::before {
+  content: counter(s, decimal-leading-zero);
+  font-family: var(--display); font-weight: 700; font-size: 1.5rem; color: var(--red);
+}
+.step h3 { margin-bottom: .3rem; }
+.step p { margin: 0; color: var(--muted); font-size: .96rem; }
+
+/* ---------- tým ---------- */
+
+.team { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1.5rem; margin-top: 2.5rem; }
+.member { border-left: 3px solid var(--red); padding-left: 1rem; }
+.member b { font-family: var(--display); font-size: 1.05rem; color: var(--indigo); display: block; }
+.member span { font-size: .9rem; color: var(--muted); }
+
+/* ---------- formulář ---------- */
+
+.form { display: grid; gap: 1rem; margin-top: 2rem; max-width: 560px; }
+.form label { font-size: .88rem; font-weight: 600; color: var(--indigo); display: block; margin-bottom: .35rem; }
+.form input, .form textarea, .form select {
+  width: 100%; font: inherit; font-size: .98rem;
+  padding: .7rem .85rem; border: 2px solid var(--line); background: #fff; color: var(--ink);
+}
+.form input:focus, .form textarea:focus, .form select:focus { outline: none; border-color: var(--indigo); }
+.form textarea { min-height: 120px; resize: vertical; }
+.form .row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.consent { display: flex; gap: .6rem; align-items: flex-start; font-size: .85rem; color: var(--muted); }
+.consent input { width: auto; margin-top: .25rem; flex: 0 0 auto; }
+.form-note { font-size: .85rem; color: var(--muted); margin-top: .5rem; }
+
+/* formulář na tmavém pozadí */
+.section-indigo .form label { color: #fff; }
+.section-indigo .consent { color: rgba(255,255,255,.85); }
+.section-indigo .form input,
+.section-indigo .form textarea,
+.section-indigo .form select { border-color: rgba(255,255,255,.35); }
+.section-indigo .form input:focus,
+.section-indigo .form textarea:focus,
+.section-indigo .form select:focus { border-color: var(--yellow); }
+
+/* ---------- patička ---------- */
+
+footer { background: var(--indigo); color: #fff; padding: clamp(3rem, 6vw, 4.5rem) 0 2.5rem; }
+footer a { color: #fff; }
+footer img.logo { height: 52px; width: auto; }
+
+.foot-top { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 2.5rem; align-items: start; }
+.foot-top h4 { font-family: var(--display); font-size: .82rem; letter-spacing: .12em; text-transform: uppercase; color: var(--yellow); margin: 0 0 .8rem; }
+.foot-top ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .45rem; font-size: .95rem; }
+
+.eu { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,.25); display: flex; flex-wrap: wrap; align-items: center; gap: 2rem; }
+.eu img { height: 46px; width: auto; }
+.eu-text { font-size: .8rem; line-height: 1.55; color: rgba(255,255,255,.78); max-width: 62ch; }
+
+.legal { margin-top: 2rem; font-size: .8rem; color: rgba(255,255,255,.6); display: flex; flex-wrap: wrap; gap: 1.2rem; justify-content: space-between; }
+
+/* ---------- responzivita ---------- */
+
+@media (max-width: 860px) {
+  .grid-2 { grid-template-columns: 1fr; }
+  .facts { grid-template-columns: 1fr 1fr; }
+  .foot-top { grid-template-columns: 1fr; gap: 2rem; }
+}
+
+@media (max-width: 620px) {
+  .nav-links { display: none; }
+  .form .row { grid-template-columns: 1fr; }
+  .shapes { height: 48px; }
+  .sq-red, .ci-indigo { width: 48px; height: 48px; }
+  .re-yellow { width: 72px; height: 24px; }
+  .ci-green { width: 30px; height: 30px; }
+}
