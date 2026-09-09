@@ -177,10 +177,22 @@ section + section { border-top: 1px solid var(--line); }
 
 /* ---------- tým ---------- */
 
-.team { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1.5rem; margin-top: 2.5rem; }
-.member { border-left: 3px solid var(--red); padding-left: 1rem; }
+.team { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1.75rem; margin-top: 2.5rem; }
 .member b { font-family: var(--display); font-size: 1.05rem; color: var(--indigo); display: block; }
 .member span { font-size: .9rem; color: var(--muted); }
+
+/* kolecko s fotkou; dokud fotka neni, jsou v nem inicialy */
+.avatar {
+  width: 100%; max-width: 132px; aspect-ratio: 1;
+  margin-bottom: 1rem;
+  border: 3px solid var(--red);
+  border-radius: 50%;
+  background: var(--indigo);
+  overflow: hidden;
+  display: grid; place-items: center;
+}
+.avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+.avatar .initials { font-family: var(--display); font-weight: 700; font-size: 1.6rem; color: #fff; }
 
 /* ---------- formulář ---------- */
 
@@ -241,6 +253,9 @@ footer img.logo { height: 52px; width: auto; }
 
 @media (max-width: 620px) {
   .nav-links { display: none; }
+  .team { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+  .avatar { max-width: 104px; }
+  .avatar .initials { font-size: 1.3rem; }
   .form .row { grid-template-columns: 1fr; }
   .shapes { height: 48px; }
   .sq-red, .ci-indigo { width: 48px; height: 48px; }

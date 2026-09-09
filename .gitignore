@@ -7,3 +7,6 @@
 
 # Node (kdyby se sem někdy dostal)
 node_modules/
+
+# Claude Code
+.claude/
