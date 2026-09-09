@@ -216,6 +216,25 @@ section + section { border-top: 1px solid var(--line); }
 .step h3 { margin-bottom: .3rem; }
 .step p { margin: 0; color: var(--muted); font-size: .96rem; }
 
+/* ---------- reference ---------- */
+
+.quote-big { margin: 0 0 1.5rem; padding: 0 0 0 1.4rem; border-left: 4px solid var(--yellow); }
+.quote-big p {
+  font-family: var(--display); font-weight: 600;
+  font-size: clamp(1.4rem, 2.6vw, 2rem); line-height: 1.2;
+  letter-spacing: -.01em; color: #fff; margin: 0 0 .8rem;
+}
+.quote-big cite { font-style: normal; font-size: .9rem; color: var(--yellow); }
+
+.foto { margin: 0; }
+.foto img { width: 100%; height: auto; }
+.foto figcaption { margin-top: .8rem; font-size: .85rem; line-height: 1.5; color: rgba(255,255,255,.7); }
+
+.quotes { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-top: 3.5rem; }
+.quote { border-top: 4px solid var(--yellow); padding-top: 1.2rem; }
+.quote p { margin: 0; font-size: .98rem; color: rgba(255,255,255,.9); }
+.quotes-note { margin: 1.2rem 0 0; font-size: .82rem; color: rgba(255,255,255,.6); }
+
 /* ---------- tým ---------- */
 
 .team { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1.75rem; margin-top: 2.5rem; }

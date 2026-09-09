@@ -11,7 +11,10 @@
 <meta property="og:description" content="Bezplatné workshopy o občanské angažovanosti pro žáky 8. a 9. tříd základních škol.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://vlastnaskolach.cz/">
-<meta property="og:image" content="https://vlastnaskolach.cz/assets/logo.png">
+<meta property="og:image" content="https://vlastnaskolach.cz/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <meta property="og:locale" content="cs_CZ">
 
 <link rel="preload" href="assets/fonts/jost-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -37,6 +40,7 @@ if (window.IntersectionObserver &&
         <a href="#o-projektu">O projektu</a>
         <a href="#temata">Témata</a>
         <a href="#workshop">Workshop</a>
+        <a href="#reference">Odezva</a>
         <a href="#tym">Tým</a>
       </div>
       <a href="#prihlaska" class="btn">Chci workshop</a>
@@ -176,6 +180,37 @@ if (window.IntersectionObserver &&
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- REFERENCE -->
+<section id="reference" class="section-indigo">
+  <div class="wrap">
+    <p class="kicker">Odezva ze škol</p>
+    <h2>Co říkali na první škole</h2>
+
+    <div class="grid-2" style="margin-top:2.5rem">
+      <div>
+        <blockquote class="quote-big">
+          <p>Dle našich žáků byl program zajímavý, bombastický.</p>
+          <cite>ZŠ Žulová, z článku na webu školy</cite>
+        </blockquote>
+        <p style="color:rgba(255,255,255,.82);max-width:44ch">Po workshopu vyplnilo devět žáků anonymní dotazník. Všichni odpověděli, že by workshop doporučili dalším třídám.</p>
+      </div>
+      <div>
+        <figure class="foto">
+          <img src="assets/workshop/pracovni-list.jpg" alt="Ruce žáka píšícího na pracovní list" width="1000" height="866" loading="lazy">
+          <figcaption>Pracovní list ze Žulové. Skupina si za téma svého projektu vybrala hlučnost ve třídě.</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="quotes">
+      <div class="quote"><p>Byla jsem ráda, že mi to pomohlo se nasměrovat a urovnat si myšlenky.</p></div>
+      <div class="quote"><p>Byla to zábava a bylo to dost motivační.</p></div>
+      <div class="quote"><p>Nejlepší byl ten konec — ty zkušenosti a dozvědět se o zajímavém životě jiných lidí.</p></div>
+    </div>
+    <p class="quotes-note">Z anonymního dotazníku pro žáky.</p>
   </div>
 </section>
 
@@ -333,8 +368,11 @@ if (window.IntersectionObserver &&
   function vzdatSe() { root.classList.remove('js-anim'); }
 
   try {
-    var groups = ['.facts .fact', '.topics .topic', '.steps .step', '.team .member'];
+    var groups = ['.facts .fact', '.topics .topic', '.steps .step',
+                  '.quotes .quote', '.team .member'];
+    var observerOdpovedel = false;
     var io = new IntersectionObserver(function (entries) {
+      observerOdpovedel = true;             // staci, ze se ozval — protnuti neresime
       entries.forEach(function (entry) {
         if (!entry.isIntersecting) return;
         entry.target.classList.add('is-in');
@@ -351,10 +389,12 @@ if (window.IntersectionObserver &&
       });
     });
 
-    // Kdyby observer z jakehokoli duvodu nikdy nespustil, po 4 s to vzdame.
+    // Pojistka smi hlidat jen to, jestli observer vubec funguje. Drive tu
+    // stalo, ze se vzdame, kdyz prvni karta lezi ve vyrezu a neni odkryta —
+    // jenze presne tak vypada spravny stav, dokud navstevnik nescrollne,
+    // takze se animace vypinaly samy. Ted staci, ze se observer jednou ozval.
     setTimeout(function () {
-      var skryte = document.querySelector('.facts .fact:not(.is-in)');
-      if (skryte && skryte.getBoundingClientRect().top < window.innerHeight) vzdatSe();
+      if (!observerOdpovedel) vzdatSe();
     }, 4000);
   } catch (e) {
     vzdatSe();

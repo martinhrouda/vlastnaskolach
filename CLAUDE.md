@@ -106,6 +106,58 @@ a ředitele, kteří web čtou mezi hodinami.
 
 ## Co je v plánu
 
-Fáze 2: prodejní sekce pro karetní vzdělávací hru (jediný produkt).
+Řazeno podle toho, co nejvíc pomůže přihláškám škol.
+
+**Reference a fotky z workshopů.** Sekce „Odezva ze škol" v `index.html`
+stojí na pilotu na ZŠ Žulová: citace z článku školy a tři citace
+z anonymního dotazníku od 9 žáků. Sbírat další — jedna škola je málo.
+
+**Mobilní navigace.** Pod 620 px se `.nav-links` schová a nic ji nenahradí,
+takže na telefonu se nedá dostat na Témata ani na Tým. Chybí hamburger.
+
+**Dohledatelnost.** Chybí `sitemap.xml`, `robots.txt` a strukturovaná data
+(JSON-LD, typ EducationalOrganization). Učitel hledající „workshop občanská
+výchova ZŠ zdarma" web nenajde.
+
+**Skutečné měření.** Zatím se počítaly jen bajty a počty spojení, ne reálné
+časy. Pustit PageSpeed Insights na živé URL a ve Vercel Analytics sledovat
+jedno číslo: kolik návštěvníků odešle přihlášku. Nízká priorita.
+
+**Fáze 2: prodejní sekce pro karetní vzdělávací hru** (jediný produkt).
 Bez platební brány — objednávkový formulář, pak faktura a QR platba převodem.
 Stripe ani Comgate nezavádět, dokud objem objednávek neporoste.
+Pozor: Vercel má u tarifu Hobby zakázané komerční použití, e-shop si vyžádá
+placený tarif nebo přesun jinam.
+
+## Fotky žáků
+
+**Souhlasy se zveřejněním podobizny nemáme a mít nebudeme.** Z toho plyne
+tvrdé pravidlo: na web nesmí fotka, na které by šel kdokoli poznat.
+
+Nestačí, že není vidět obličej. Rozhoduje, jestli člověka pozná někdo,
+kdo ho zná — spolužák nebo rodič pozná mikinu, vlasy a místo v lavici.
+U fotky z konkrétní třídy, konkrétní školy a konkrétního dne to platí
+i pro záběry zezadu. Ty proto taky ne.
+
+Projde jen detail bez člověka: ruce, pracovní list, materiály na stole,
+prázdná učebna. Jediná použitá fotka (`assets/workshop/pracovni-list.jpg`)
+je ořez ruky s pracovním listem — hlava ani ramena na ní nejsou.
+
+Až budou souhlasy, dá se to uvolnit. Nejjednodušší cesta: přidat do
+domluvy se školou dotaz, jestli má od zákonných zástupců souhlas
+s fotografováním pro propagaci, a odpověď si zaznamenat.
+
+## Vztah k Akademii Díky, že můžem
+
+Celý tým jsou absolventi Akademie Díky, že můžem. **Se spolkem ani
+s Akademií ale nejsme nijak spojení** — žádné partnerství, žádná
+zastřešující organizace. Na webu proto nesmí být nic, co by spojení
+naznačovalo: ani loga, ani samolepky a slidy s brandingem DŽM na fotkách.
+
+Pozor na článek ZŠ Žulová, který jako lektory uvádí „mladé lektory
+z Akademie Díky, že můžem". Je to omyl školy. Proto z něj na webu
+citujeme jen větu o reakci žáků a na článek neodkazujeme.
+Stálo by za to poprosit školu o opravu.
+
+Být absolventem Akademie je osobní fakt jednotlivce — v medailonku
+u člena týmu se uvést dá, jako organizační vazba ne.
