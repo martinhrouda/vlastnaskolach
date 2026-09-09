@@ -1,0 +1,14 @@
+{
+  "name": "vlastnaskolach",
+  "version": "1.0.0",
+  "description": "Vlast na školách - workshopy o občanské angažovanosti",
+  "type": "module",
+  "scripts": {
+    "dev": "npx serve .",
+    "build": "echo 'Static site - no build needed'",
+    "lint": "echo 'No linter configured'"
+  },
+  "dependencies": {
+    "@vercel/analytics": "^1.4.1"
+  }
+}
