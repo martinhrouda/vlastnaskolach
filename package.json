@@ -1,0 +1,12 @@
+{
+  "name": "vlastnaskolach",
+  "version": "1.0.0",
+  "description": "Workshopy o občanské angažovanosti pro 8. a 9. třídy",
+  "private": true,
+  "scripts": {
+    "test": "echo \"No tests configured\""
+  },
+  "dependencies": {
+    "@vercel/analytics": "^1.4.1"
+  }
+}
