@@ -1,6 +1,47 @@
 /* Vlast na školách — design systém
    Barvy a typografie podle brand manuálu (červenec 2026) */
 
+/* Pisma hostujeme sami, ne pres Google Fonts: usetri to dve cizi
+   domeny na kriticke ceste vykreslovani. Jsou to variable fonty,
+   proto jeden soubor pokryva cely rozsah vah.
+   Subset latin-ext je pro ceskou diakritiku (e s c r z u) nutny. */
+
+@font-face {
+  font-family: "Jost";
+  font-style: normal;
+  font-weight: 500 700;
+  font-display: swap;
+  src: url("assets/fonts/jost-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Jost";
+  font-style: normal;
+  font-weight: 500 700;
+  font-display: swap;
+  src: url("assets/fonts/jost-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url("assets/fonts/inter-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url("assets/fonts/inter-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
 :root {
   --indigo: #190881;
   --red: #d80300;
@@ -242,6 +283,47 @@ footer img.logo { height: 52px; width: auto; }
 .eu-text { font-size: .8rem; line-height: 1.55; color: rgba(255,255,255,.78); max-width: 62ch; }
 
 .legal { margin-top: 2rem; font-size: .8rem; color: rgba(255,255,255,.6); display: flex; flex-wrap: wrap; gap: 1.2rem; justify-content: space-between; }
+
+/* ---------- animace pri scrollu ---------- */
+
+/* Trida js-anim se pridava inline skriptem v <head>, takze se prvky
+   skryji jeste pred prvnim vykreslenim a nic neproblikne. Kdyz JS
+   nebezi nebo si uzivatel vyzada omezeny pohyb, trida se neprida
+   a cely web je staticky videt — animace je jen prikrasa.
+   Hero se zamerne neanimuje, at se nezdrzuje prvni vykresleni. */
+
+.js-anim .fact,
+.js-anim .topic,
+.js-anim .step,
+.js-anim .member {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity .55s ease, transform .55s ease;
+  transition-delay: var(--d, 0ms);
+}
+
+.js-anim .fact.is-in,
+.js-anim .topic.is-in,
+.js-anim .step.is-in,
+.js-anim .member.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* kolecka u tymu dojedou z mensiho — kruh je nosny tvar webu */
+.js-anim .member .avatar {
+  transform: scale(.88);
+  transition: transform .55s ease;
+  transition-delay: var(--d, 0ms);
+}
+.js-anim .member.is-in .avatar { transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .js-anim .fact, .js-anim .topic, .js-anim .step, .js-anim .member,
+  .js-anim .member .avatar {
+    opacity: 1; transform: none; transition: none;
+  }
+}
 
 /* ---------- responzivita ---------- */
 

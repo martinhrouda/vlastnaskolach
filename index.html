@@ -14,17 +14,24 @@
 <meta property="og:image" content="https://vlastnaskolach.cz/assets/logo.png">
 <meta property="og:locale" content="cs_CZ">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preload" href="assets/fonts/jost-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/jost-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="style.css">
+<script>
+/* Pred prvnim vykreslenim: jen kdyz umime IntersectionObserver a uzivatel
+   nema zapnuty omezeny pohyb. Jinak zustava web bez animaci a plne videt. */
+if (window.IntersectionObserver &&
+    !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  document.documentElement.classList.add('js-anim');
+}
+</script>
 <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
 </head>
 <body>
 
 <header>
   <div class="bar">
-    <a href="#"><img src="assets/logo.png" alt="Vlast na školách"></a>
+    <a href="#"><img src="assets/logo.png" alt="Vlast na školách" width="400" height="113"></a>
     <nav>
       <div class="nav-links">
         <a href="#o-projektu">O projektu</a>
@@ -282,7 +289,7 @@
   <div class="wrap">
     <div class="foot-top">
       <div>
-        <img class="logo" src="assets/logo-white.png" alt="Vlast na školách">
+        <img class="logo" src="assets/logo-white.png" alt="Vlast na školách" width="400" height="113">
         <p style="margin-top:1rem;font-size:.95rem;color:rgba(255,255,255,.8);max-width:34ch">Vzdělávací iniciativa, která přibližuje žákům druhého stupně význam občanské participace, kultury a historie.</p>
       </div>
       <div>
@@ -303,7 +310,7 @@
     </div>
 
     <div class="eu">
-      <img src="assets/eu-bile.svg" alt="Spolufinancováno Evropskou unií">
+      <img src="assets/eu-bile.svg" alt="Spolufinancováno Evropskou unií" width="943" height="245">
       <p class="eu-text">Financováno Evropskou unií. Vyjádřené názory a stanoviska jsou názory a stanoviska autora nebo autorů a nemusí nutně odrážet názory a stanoviska Evropské unie nebo Domu zahraniční spolupráce. Evropská unie ani poskytovatel grantu za ně nenesou odpovědnost.</p>
     </div>
 
@@ -314,6 +321,46 @@
   </div>
 </footer>
 
+
+<script>
+(function () {
+  var root = document.documentElement;
+  if (!root.classList.contains('js-anim')) return;
+
+  // Pojistka: dokud trida js-anim visi na <html>, jsou prvky skryte.
+  // Kdyby cokoli nize selhalo, tridu sundame a web je zase cely videt —
+  // radeji zadna animace nez neviditelny obsah.
+  function vzdatSe() { root.classList.remove('js-anim'); }
+
+  try {
+    var groups = ['.facts .fact', '.topics .topic', '.steps .step', '.team .member'];
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-in');
+        io.unobserve(entry.target);        // odkryva se jen jednou
+      });
+    }, { rootMargin: '0px 0px -12% 0px', threshold: 0.15 });
+
+    groups.forEach(function (selector) {
+      var items = document.querySelectorAll(selector);
+      Array.prototype.forEach.call(items, function (item, i) {
+        // schodek mezi sourozenci — karty a cisla naskakuji po jednom
+        item.style.setProperty('--d', Math.min(i, 6) * 80 + 'ms');
+        io.observe(item);
+      });
+    });
+
+    // Kdyby observer z jakehokoli duvodu nikdy nespustil, po 4 s to vzdame.
+    setTimeout(function () {
+      var skryte = document.querySelector('.facts .fact:not(.is-in)');
+      if (skryte && skryte.getBoundingClientRect().top < window.innerHeight) vzdatSe();
+    }, 4000);
+  } catch (e) {
+    vzdatSe();
+  }
+})();
+</script>
 
 <script>
 (function () {
