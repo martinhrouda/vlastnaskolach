@@ -198,7 +198,7 @@
     </div>
 
     <div>
-      <form class="form" action="https://api.web3forms.com/submit" method="POST">
+      <form class="form" id="prihlaska-form" action="https://api.web3forms.com/submit" method="POST">
         <input type="hidden" name="access_key" value="788a6aea-ac4b-4a4a-b32d-e5facf6c73dd">
         <input type="hidden" name="subject" value="Nová přihláška školy — vlastnaskolach.cz">
         <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
@@ -243,13 +243,19 @@
         </div>
 
         <label class="consent">
-          <input type="checkbox" required>
+          <input type="checkbox" name="souhlas_gdpr" value="ano" required>
           <span>Souhlasím se zpracováním uvedených údajů za účelem domluvy workshopu. Podrobnosti v <a href="gdpr.html">zásadách ochrany osobních údajů</a>.</span>
         </label>
 
         <div><button type="submit" class="btn" style="border:none;cursor:pointer">Odeslat přihlášku</button></div>
         <p class="form-note" style="color:rgba(255,255,255,.7)">Ozveme se do několika dnů.</p>
+        <p class="form-error" id="form-error" hidden>Odeslání se nepodařilo. Zkuste to prosím znovu, nebo nám napište přímo na <a href="mailto:info@vlastnaskolach.cz">info@vlastnaskolach.cz</a>.</p>
       </form>
+
+      <div class="form-done" id="prihlaska-done" hidden>
+        <h3>Přihláška dorazila. Děkujeme!</h3>
+        <p>Ozveme se do několika dnů na e-mail, který jste uvedli. Kdyby to bylo naléhavé, napište rovnou na <a href="mailto:info@vlastnaskolach.cz">info@vlastnaskolach.cz</a>.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -292,5 +298,40 @@
   </div>
 </footer>
 
+
+<script>
+(function () {
+  var form = document.getElementById('prihlaska-form');
+  if (!form) return;
+  var done = document.getElementById('prihlaska-done');
+  var error = document.getElementById('form-error');
+  var button = form.querySelector('button[type=submit]');
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    error.hidden = true;
+    var label = button.textContent;
+    button.disabled = true;
+    button.textContent = 'Odesílám…';
+
+    fetch(form.action, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(Object.fromEntries(new FormData(form)))
+    })
+      .then(function (r) {
+        if (r.status !== 200) throw new Error(r.status);
+        form.hidden = true;
+        done.hidden = false;
+        done.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      })
+      .catch(function () {
+        button.disabled = false;
+        button.textContent = label;
+        error.hidden = false;
+      });
+  });
+})();
+</script>
 </body>
 </html>
