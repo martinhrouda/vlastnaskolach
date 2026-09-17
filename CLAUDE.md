@@ -34,8 +34,20 @@ Barvy a písma jsou v `:root` v `style.css`. Vychází z brand manuálu
 --green   #16532e   --yellow #f4b200   --orange #ff8e09   doplňkové
 ```
 
-Nadpisy: **Jost** (Google Fonts) — náhrada za Joost Schmidt z brand manuálu,
-který není volně dostupný. Text: **Inter**.
+Písmo: **Inter** na nadpisy i text, hostované v `assets/fonts/` (variable
+font, subsety latin + latin-ext), ne přes Google Fonts. Proměnná `--display`
+je jen alias na `--text` — nechaná kvůli tomu, že ji používá celé CSS.
+
+**Joost** (Type-O-Tones) z brand manuálu je jen v logu, a to jako obrázek.
+Jako webfont ho na web nedávat. Co o něm víme (září 2026):
+
+- Type-O-Tones **žádnou bezplatnou licenci nemá**, ani nekomerční. Soubory
+  z blogfonts.com jsou nelicencovaná stará verze 2.005, které navíc chybí
+  č ď ě ň ř ť ů. Aktuální placená verze 3.5 má Latin-2, tedy češtinu.
+- Pro logo, tiskoviny a karetní hru stačí **Desktop licence**: dovoluje
+  tisk i použití na webu jako obrázek. **Webfont licence** výrobu fyzických
+  produktů výslovně zakazuje, pro hru se nehodí.
+- Licence je na počet počítačů — stačí ten, na kterém vzniká grafika.
 
 Vizuální jazyk je bauhausový: kruhy a obdélníky, ostré hrany, hodně bílého
 prostoru, velká typografie. Žádné stíny, žádné gradienty, žádné zaoblené
