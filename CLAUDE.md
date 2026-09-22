@@ -83,6 +83,19 @@ Nad 620 px se pět odkazů vejde (ověřeno až do 621 px); při přidání šes
 odkazu breakpoint přeměřit. Hlavička je sticky, proto `scroll-padding-top`
 na `html` — při změně výšky hlavičky ho upravit.
 
+## Profil hubu pro iPhone
+
+`hub.mobileconfig` je **podepsaný** binární soubor, přímo ho neupravovat.
+Zdroj (nepodepsaný plist), certifikát a postup podpisu jsou mimo repo
+v `~/Documents/vlast/hub/podpis/README.txt`. Klip vede na `/hub?z=plocha`,
+takže změna cíle hubu profil nevyžaduje.
+
+Podpis je certifikátem Let's Encrypt pro www a **platí do 21. 12. 2026**.
+Potom profil funguje dál, jen nové instalace ukážou „Neověřeno". Nový
+certifikát jde vydat jen přes záznam TXT `_acme-challenge.www` — výjimka
+z pravidla o DNS, jen se souhlasem a po vydání záznam smazat. Ověření
+souborem nejde, Vercel si `/.well-known/acme-challenge/` bere pro sebe.
+
 ## Formulář
 
 Přihláška jede přes **Web3Forms** — žádný backend. `access_key` je přímo
