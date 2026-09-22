@@ -43,6 +43,11 @@
     }
 
     html.className = ios ? 'ios' : 'android';
+    // profil jde nainstalovat jen ze Safari; Chrome a prohlizece uvnitr
+    // aplikaci (Instagram, Messenger…) maji vlastni znacku nebo chybi "Safari/"
+    if (ios && (!/Safari\//.test(ua) || /CriOS|FxiOS|EdgiOS|OPiOS|GSA\//.test(ua))) {
+      html.className += ' mimo-safari';
+    }
     // ikona na plose si uklada aktualni adresu, at ji pri spusteni pozname
     if (history.replaceState) history.replaceState(null, '', '/hub?z=plocha');
   })();
@@ -128,8 +133,17 @@
   .ios .jen-ios, .android .jen-android { display: block; }
   html:not(.ios):not(.android) .jen-ios,
   html:not(.ios):not(.android) .jen-android { display: block; margin-top: 12px; }
-  .jen-android-text, .android .jen-ios-text { display: none; }
-  .android .jen-android-text { display: inline; }
+  .jen-mimo-safari { display: none; }
+  .mimo-safari .jen-mimo-safari { display: block; margin: 0 0 14px; }
+
+  /* nahradni cesta na iPhonu bez profilu, schovana, at neodvadi pozornost */
+  .jinak { margin-top: 18px; }
+  .jinak summary {
+    cursor: pointer; color: var(--muted); font-size: .9rem; font-weight: 600;
+  }
+  .jinak .kroky { margin-top: 12px; }
+
+  .prihlaseni { margin: 24px 0 0; font-size: .88rem; color: var(--muted); }
 
   .poznamka {
     margin: 18px 0 0; padding: 14px 16px;
@@ -144,6 +158,11 @@
   }
   .tlacitko:active { opacity: .85; }
   .tlacitko:focus-visible { outline: 3px solid var(--orange); outline-offset: 3px; }
+  .kroky .tlacitko { margin: 10px 0 4px; }
+  .tlacitko.vedlejsi {
+    margin-top: 14px; background: transparent; color: var(--indigo);
+    box-shadow: inset 0 0 0 2px #d9d5ee;
+  }
 
   /* stav "odchazim do hubu": pocitac, spusteni z plochy, navrat tlacitkem Hotovo */
   .odchod-obsah { display: none; }
@@ -165,23 +184,40 @@
       <span><b>Týmový hub</b>takhle bude vypadat na ploše</span>
     </div>
 
-    <ol class="kroky jen-ios">
-      <li>Klepněte na <b>Sdílet</b><small>čtvereček se šipkou nahoru; na nejnovějších iPhonech je pod tlačítkem&nbsp;⋯</small></li>
-      <li>Vyberte <b>Přidat na plochu</b><small>případně nejdřív sjeďte v nabídce níž</small></li>
-      <li>Potvrďte <b>Přidat</b></li>
-    </ol>
+    <!-- Na iPhonu jde hub pres profil s webovym klipem (FullScreen +
+         IgnoreManifestScope): otevre se pres celou obrazovku i na Sites
+         a pri prihlaseni Google, bez okna s tlacitkem Hotovo. -->
+    <div class="jen-ios">
+      <p class="poznamka jen-mimo-safari">Profil jde nainstalovat jen v Safari. Otevřete v něm adresu <b>www.vlastnaskolach.cz/hub</b>.</p>
+      <ol class="kroky">
+        <li>Stáhněte profil a potvrďte <b>Povolit</b>
+          <a class="tlacitko" href="/hub.mobileconfig">Stáhnout profil</a></li>
+        <li>Otevřete <b>Nastavení</b> a nahoře klepněte na <b>Profil stažen</b></li>
+        <li>Klepněte na <b>Instalovat</b>, zadejte kód telefonu a instalaci potvrďte<small>ikona hubu se pak objeví na ploše</small></li>
+      </ol>
+      <p class="poznamka">U profilu bude napsáno <b>Neověřeno</b>, to je v pořádku. Profil jen přidá ikonu, která otevře hub přes celou obrazovku, a nic jiného v telefonu nemění. Odebrat ho jde v Nastavení → Obecné → VPN a správa zařízení.</p>
+      <details class="jinak">
+        <summary>Přidat bez profilu</summary>
+        <ol class="kroky">
+          <li>Klepněte na <b>Sdílet</b><small>čtvereček se šipkou nahoru; na nejnovějších iPhonech je pod tlačítkem&nbsp;⋯</small></li>
+          <li>Vyberte <b>Přidat na plochu</b><small>případně nejdřív sjeďte v nabídce níž</small></li>
+          <li>Potvrďte <b>Přidat</b><small>hub se pak otevře v okně s tlačítkem Hotovo</small></li>
+        </ol>
+      </details>
+    </div>
 
-    <ol class="kroky jen-android">
-      <li>Klepněte vpravo nahoře na <b>⋮</b></li>
-      <li>Vyberte <b>Přidat na plochu</b><small>na některých telefonech se jmenuje Instalovat aplikaci</small></li>
-      <li>Potvrďte <b>Přidat</b></li>
-    </ol>
+    <div class="jen-android">
+      <ol class="kroky">
+        <li>Klepněte vpravo nahoře na <b>⋮</b></li>
+        <li>Vyberte <b>Přidat na plochu</b><small>na některých telefonech se jmenuje Instalovat aplikaci</small></li>
+        <li>Potvrďte <b>Přidat</b></li>
+      </ol>
+      <p class="poznamka">Po spuštění z plochy se hub otevře v okně s lištou a křížkem nahoře, to tak má být.</p>
+    </div>
 
-    <p class="poznamka">Po spuštění z plochy se hub otevře v okně
-      <span class="jen-ios-text">s tlačítkem <b>Hotovo</b></span><span class="jen-android-text">s lištou a křížkem nahoře</span>,
-      to tak má být. Přihlaste se účtem, přes který jste v týmu.</p>
+    <p class="prihlaseni">Při prvním spuštění se přihlaste účtem Google, přes který jste v týmu.</p>
 
-    <a class="tlacitko" href="https://sites.google.com/vlastnaskolach.cz/hub-iniciativa-vlast">Otevřít hub bez přidání</a>
+    <a class="tlacitko vedlejsi" href="https://sites.google.com/vlastnaskolach.cz/hub-iniciativa-vlast">Otevřít hub bez přidání</a>
   </div>
 
   <div class="odchod-obsah">

@@ -2,5 +2,13 @@
   "rewrites": [
     { "source": "/hub", "destination": "/hub.html" },
     { "source": "/hub/", "destination": "/hub.html" }
+  ],
+  "headers": [
+    {
+      "source": "/hub.mobileconfig",
+      "headers": [
+        { "key": "Content-Type", "value": "application/x-apple-aspen-config" }
+      ]
+    }
   ]
 }
