@@ -1,0 +1,13 @@
+{
+  "name": "Týmový hub · Vlast na školách",
+  "short_name": "Týmový hub",
+  "start_url": "/hub?z=plocha",
+  "scope": "/hub",
+  "display": "standalone",
+  "background_color": "#f7f6fc",
+  "theme_color": "#f7f6fc",
+  "icons": [
+    { "src": "/assets/app/ikona-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/assets/app/ikona-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

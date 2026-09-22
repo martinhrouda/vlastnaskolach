@@ -18,6 +18,8 @@ Hlavní účel webu: aby se škola mohla přihlásit o workshop.
 ```
 index.html    jednostránkovka (hero, témata, průběh, tým, přihláška)
 gdpr.html     zásady ochrany osobních údajů
+hub.html      /hub: přidání interního hubu (Google Sites) na plochu telefonu,
+              jinak přesměruje na Sites; ikony v assets/app/, hub.webmanifest
 style.css     celý design systém, proměnné nahoře
 assets/       logo, ikona, loga EU a ESC
 podpisy/      obrázky pro e-mailové podpisy, servírované na /podpisy/

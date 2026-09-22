@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Týmový hub · Vlast na školách</title>
+<meta name="robots" content="noindex">
+
+<!-- Mezistranka k internimu hubu v Google Sites. Sites nam do hlavicky
+     nepusti apple-touch-icon, takze si ho lidi na plochu pridavaji odsud:
+     ikona je nase, po spusteni z plochy stranka preda hub dal.
+     Adresa /hub sem vede pres rewrite ve vercel.json. -->
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="manifest" href="/hub.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Týmový hub">
+<meta name="theme-color" content="#f7f6fc">
+
+<script>
+  (function () {
+    var HUB = 'https://sites.google.com/vlastnaskolach.cz/hub-iniciativa-vlast';
+    var html = document.documentElement;
+    var ua = navigator.userAgent;
+    var android = /Android/.test(ua);
+    // iPad se hlasi jako Mac, prozradi ho az dotykovy displej
+    var ios = !android && (/iPhone|iPad|iPod/.test(ua) ||
+              (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1));
+
+    // spusteno z plochy: iOS to hlasi pres navigator.standalone, Android pres
+    // display-mode. Znacka z=plocha je pojistka pro zastupce, kteri se na
+    // Androidu otevrou v obycejne karte prohlizece.
+    var zPlochy = /(?:^|[?&])z=plocha(?:&|$)/.test(location.search);
+    var samostatne = navigator.standalone === true ||
+                     (window.matchMedia && matchMedia('(display-mode: standalone)').matches);
+
+    // na pocitaci neni co instalovat, /hub funguje jako kratky odkaz
+    if (samostatne || zPlochy || !(ios || android)) {
+      html.className = 'odchod';
+      location.replace(HUB);
+      return;
+    }
+
+    html.className = ios ? 'ios' : 'android';
+    // ikona na plose si uklada aktualni adresu, at ji pri spusteni pozname
+    if (history.replaceState) history.replaceState(null, '', '/hub?z=plocha');
+  })();
+</script>
+
+<style>
+  @font-face {
+    font-family: "Inter"; font-style: normal; font-weight: 400 700; font-display: swap;
+    src: url("/assets/fonts/inter-latin.woff2") format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  @font-face {
+    font-family: "Inter"; font-style: normal; font-weight: 400 700; font-display: swap;
+    src: url("/assets/fonts/inter-latin-ext.woff2") format("woff2");
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  }
+
+  /* Stejne tokeny jako embedy hubu v Sites, at to pusobi jako jedna aplikace */
+  :root {
+    --indigo: #190881; --red: #d80300; --green: #16532e;
+    --yellow: #f4b200; --orange: #ff8e09;
+    --ink: #12123a; --muted: #5a5a78; --pozadi: #f7f6fc;
+    --radius: 18px; --stin: 0 2px 6px rgba(20, 30, 60, .08);
+  }
+
+  * { box-sizing: border-box; }
+  html { background: var(--pozadi); }
+  body {
+    margin: 0; color: var(--ink);
+    font: 16px/1.55 "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { display: block; max-width: 100%; }
+
+  .wrap {
+    max-width: 520px; margin: 0 auto;
+    padding: max(28px, env(safe-area-inset-top)) 22px max(40px, env(safe-area-inset-bottom));
+  }
+
+  .logo { height: 44px; width: auto; }
+  .kicker {
+    margin: 12px 0 0; font-size: .72rem; font-weight: 700;
+    letter-spacing: .14em; text-transform: uppercase; color: var(--orange);
+  }
+  h1 {
+    margin: 26px 0 10px; font-size: 2.1rem; font-weight: 800;
+    letter-spacing: -.035em; line-height: 1.05; color: var(--indigo);
+  }
+  h1 em { font-style: normal; color: var(--red); }
+  .uvod { margin: 0; color: var(--muted); }
+
+  /* nahled ikony, jak bude vypadat na plose */
+  .nahled { display: flex; align-items: center; gap: 16px; margin: 26px 0 28px; }
+  .nahled img {
+    width: 72px; height: 72px; border-radius: 17px;
+    box-shadow: 0 4px 14px rgba(20, 30, 60, .16);
+  }
+  .nahled span { font-size: .86rem; color: var(--muted); }
+  .nahled b { display: block; color: var(--ink); font-size: 1rem; }
+
+  .kroky {
+    list-style: none; margin: 0; padding: 18px 20px;
+    background: #fff; border-radius: var(--radius); box-shadow: var(--stin);
+    counter-reset: k;
+  }
+  .kroky li {
+    counter-increment: k; position: relative;
+    padding: 9px 0 9px 44px; min-height: 30px;
+  }
+  .kroky li::before {
+    content: counter(k); position: absolute; left: 0; top: 7px;
+    width: 30px; height: 30px; border-radius: 50%;
+    display: grid; place-items: center;
+    background: var(--indigo); color: #fff; font-size: .85rem; font-weight: 700;
+  }
+  .kroky li:nth-child(2)::before { background: var(--red); }
+  .kroky li:nth-child(3)::before { background: var(--green); }
+  .kroky b { font-weight: 700; }
+  .kroky small { display: block; color: var(--muted); font-size: .82rem; }
+
+  /* ukazat jen navod pro telefon, na kterem stranka bezi */
+  .jen-ios, .jen-android { display: none; }
+  .ios .jen-ios, .android .jen-android { display: block; }
+  html:not(.ios):not(.android) .jen-ios,
+  html:not(.ios):not(.android) .jen-android { display: block; margin-top: 12px; }
+  .jen-android-text, .android .jen-ios-text { display: none; }
+  .android .jen-android-text { display: inline; }
+
+  .poznamka {
+    margin: 18px 0 0; padding: 14px 16px;
+    background: #fff8e1; border-radius: 14px;
+    font-size: .88rem; color: var(--ink);
+  }
+
+  .tlacitko {
+    display: block; margin-top: 26px; padding: 14px 18px;
+    background: var(--indigo); color: #fff; text-align: center;
+    border-radius: 14px; font-weight: 700; text-decoration: none;
+  }
+  .tlacitko:active { opacity: .85; }
+  .tlacitko:focus-visible { outline: 3px solid var(--orange); outline-offset: 3px; }
+
+  /* stav "odchazim do hubu": pocitac, spusteni z plochy, navrat tlacitkem Hotovo */
+  .odchod-obsah { display: none; }
+  .odchod .instalace { display: none; }
+  .odchod .odchod-obsah { display: block; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <img class="logo" src="/assets/logo.png" alt="Vlast na školách" width="400" height="113">
+  <p class="kicker">Pro tým a lektory</p>
+
+  <div class="instalace">
+    <h1>Týmový hub <em>do telefonu</em></h1>
+    <p class="uvod">Přidejte si hub na plochu. Otevřete ho jedním klepnutím, bez hledání odkazu.</p>
+
+    <div class="nahled">
+      <img src="/assets/apple-touch-icon.png" alt="" width="180" height="180">
+      <span><b>Týmový hub</b>takhle bude vypadat na ploše</span>
+    </div>
+
+    <ol class="kroky jen-ios">
+      <li>Klepněte na <b>Sdílet</b><small>čtvereček se šipkou nahoru; na nejnovějších iPhonech je pod tlačítkem&nbsp;⋯</small></li>
+      <li>Vyberte <b>Přidat na plochu</b><small>případně nejdřív sjeďte v nabídce níž</small></li>
+      <li>Potvrďte <b>Přidat</b></li>
+    </ol>
+
+    <ol class="kroky jen-android">
+      <li>Klepněte vpravo nahoře na <b>⋮</b></li>
+      <li>Vyberte <b>Přidat na plochu</b><small>na některých telefonech se jmenuje Instalovat aplikaci</small></li>
+      <li>Potvrďte <b>Přidat</b></li>
+    </ol>
+
+    <p class="poznamka">Po spuštění z plochy se hub otevře v okně
+      <span class="jen-ios-text">s tlačítkem <b>Hotovo</b></span><span class="jen-android-text">s lištou a křížkem nahoře</span>,
+      to tak má být. Přihlaste se účtem, přes který jste v týmu.</p>
+
+    <a class="tlacitko" href="https://sites.google.com/vlastnaskolach.cz/hub-iniciativa-vlast">Otevřít hub bez přidání</a>
+  </div>
+
+  <div class="odchod-obsah">
+    <h1>Otevírám <em>hub</em>…</h1>
+    <p class="uvod">Kdyby se neotevřel sám, klepněte níž.</p>
+    <a class="tlacitko" href="https://sites.google.com/vlastnaskolach.cz/hub-iniciativa-vlast">Otevřít týmový hub</a>
+  </div>
+</div>
+</body>
+</html>
