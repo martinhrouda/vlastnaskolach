@@ -1,0 +1,14 @@
+{
+  "redirects": [
+    {
+      "source": "/hub",
+      "destination": "https://sites.google.com/vlastnaskolach.cz/hub-iniciativa-vlast",
+      "permanent": false
+    },
+    {
+      "source": "/hub/",
+      "destination": "https://sites.google.com/vlastnaskolach.cz/hub-iniciativa-vlast",
+      "permanent": false
+    }
+  ]
+}
