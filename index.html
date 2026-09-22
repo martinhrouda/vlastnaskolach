@@ -10,8 +10,9 @@
 <meta property="og:title" content="Vlast na školách">
 <meta property="og:description" content="Bezplatné workshopy o občanské angažovanosti pro žáky 8. a 9. tříd základních škol.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://vlastnaskolach.cz/">
-<meta property="og:image" content="https://vlastnaskolach.cz/assets/og.jpg">
+<meta property="og:url" content="https://www.vlastnaskolach.cz/">
+<link rel="canonical" href="https://www.vlastnaskolach.cz/">
+<meta property="og:image" content="https://www.vlastnaskolach.cz/assets/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
@@ -21,6 +22,8 @@
 <link rel="preload" href="assets/fonts/inter-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="style.css">
 <script>
+/* Trida js: mobilni menu. Bez JS zustanou odkazy v hlavicce videt. */
+document.documentElement.classList.add('js');
 /* Pred prvnim vykreslenim: jen kdyz umime IntersectionObserver a uzivatel
    nema zapnuty omezeny pohyb. Jinak zustava web bez animaci a plne videt. */
 if (window.IntersectionObserver &&
@@ -35,8 +38,11 @@ if (window.IntersectionObserver &&
 <header>
   <div class="bar">
     <a href="#"><img src="assets/logo.png" alt="Vlast na školách" width="400" height="113"></a>
-    <nav>
-      <div class="nav-links">
+    <nav aria-label="Hlavní navigace">
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu" aria-label="Menu">
+        <span class="menu-ikona" aria-hidden="true"></span>
+      </button>
+      <div class="nav-links" id="menu">
         <a href="#o-projektu">O projektu</a>
         <a href="#temata">Témata</a>
         <a href="#workshop">Workshop</a>
@@ -356,6 +362,43 @@ if (window.IntersectionObserver &&
   </div>
 </footer>
 
+
+<script>
+(function () {
+  var toggle = document.querySelector('.menu-toggle');
+  var menu = document.getElementById('menu');
+  if (!toggle || !menu) return;
+
+  function nastav(otevrit) {
+    toggle.setAttribute('aria-expanded', otevrit ? 'true' : 'false');
+    menu.classList.toggle('is-open', otevrit);
+  }
+
+  toggle.addEventListener('click', function () {
+    nastav(toggle.getAttribute('aria-expanded') !== 'true');
+  });
+
+  // po kliknuti na odkaz zavrit, jinak by menu zakrylo cilovou sekci
+  menu.addEventListener('click', function (e) {
+    if (e.target.closest('a')) nastav(false);
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && menu.classList.contains('is-open')) {
+      nastav(false);
+      toggle.focus();
+    }
+  });
+
+  document.addEventListener('click', function (e) {
+    if (menu.classList.contains('is-open') && !e.target.closest('header')) nastav(false);
+  });
+
+  // pri otoceni telefonu nebo roztazeni okna nad breakpoint menu zavrit
+  var mobil = matchMedia('(max-width: 620px)');
+  if (mobil.addEventListener) mobil.addEventListener('change', function () { nastav(false); });
+})();
+</script>
 
 <script>
 (function () {

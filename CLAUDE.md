@@ -71,6 +71,15 @@ Zdrojová loga jsou v `~/Documents/vlast/LOGA/novy branding/`, ale jsou to
 čtverce 2000×2000 s velkým prázdným okolím — před použitím ořezat na bbox.
 Staré modré logo připomínající ikonu Wi-Fi je zavržené, nepoužívat.
 
+## Mobilní menu
+
+Pod 620 px se odkazy z hlavičky schovají do vysouvacího panelu za tlačítkem
+`.menu-toggle`. Skrývání závisí na třídě `js` na `<html>` (nastavuje ji inline
+skript v `<head>`) — bez JS zůstanou odkazy vidět, zalomené pod logem.
+Nad 620 px se pět odkazů vejde (ověřeno až do 621 px); při přidání šestého
+odkazu breakpoint přeměřit. Hlavička je sticky, proto `scroll-padding-top`
+na `html` — při změně výšky hlavičky ho upravit.
+
 ## Formulář
 
 Přihláška jede přes **Web3Forms** — žádný backend. `access_key` je přímo
@@ -123,9 +132,6 @@ a ředitele, kteří web čtou mezi hodinami.
 **Reference a fotky z workshopů.** Sekce „Odezva ze škol" v `index.html`
 stojí na pilotu na ZŠ Žulová: citace z článku školy a tři citace
 z anonymního dotazníku od 9 žáků. Sbírat další — jedna škola je málo.
-
-**Mobilní navigace.** Pod 620 px se `.nav-links` schová a nic ji nenahradí,
-takže na telefonu se nedá dostat na Témata ani na Tým. Chybí hamburger.
 
 **Dohledatelnost.** Chybí `sitemap.xml`, `robots.txt` a strukturovaná data
 (JSON-LD, typ EducationalOrganization). Učitel hledající „workshop občanská

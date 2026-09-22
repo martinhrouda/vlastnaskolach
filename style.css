@@ -51,6 +51,9 @@
 
 html { scroll-behavior: smooth; }
 
+/* hlavicka je sticky; bez odsazeni by po skoku na kotvu zakryla nadpis sekce */
+html { scroll-padding-top: 5rem; }
+
 body {
   margin: 0;
   background: var(--paper);
@@ -120,6 +123,9 @@ nav a {
 nav a:hover { color: var(--red); }
 
 .nav-links { display: flex; gap: 1.6rem; }
+
+/* tlacitko mobilniho menu — na desktopu neni */
+.menu-toggle { display: none; }
 
 /* ---------- tlačítka ---------- */
 
@@ -337,7 +343,56 @@ footer img.logo { height: 52px; width: auto; }
 }
 
 @media (max-width: 620px) {
-  .nav-links { display: none; }
+  /* hlavicka: logo, vyzva a tlacitko menu se musi vejit i na 360 px */
+  .bar { gap: .75rem; }
+  .bar img { height: 28px; }
+  nav { gap: .6rem; }
+  nav .btn { padding: .6rem .85rem; font-size: .92rem; white-space: nowrap; }
+
+  /* bez JS: odkazy zalomene pod logo, at je navigace aspon nejaka */
+  .bar { flex-wrap: wrap; }
+  nav { flex-wrap: wrap; justify-content: flex-end; }
+  .nav-links { flex-wrap: wrap; gap: .3rem 1rem; order: 3; width: 100%; justify-content: flex-end; }
+
+  /* s JS: vysouvaci panel pod hlavickou */
+  .js .bar, .js nav { flex-wrap: nowrap; }
+  .js nav .btn { order: 1; }
+  .js .menu-toggle {
+    order: 2;
+    display: inline-grid; place-items: center;
+    width: 42px; height: 42px; padding: 0; flex: 0 0 auto;
+    background: transparent; border: 2px solid var(--indigo); cursor: pointer;
+  }
+  .menu-ikona,
+  .menu-ikona::before,
+  .menu-ikona::after {
+    display: block; width: 20px; height: 2px; background: var(--indigo);
+    transition: transform .2s ease, background .2s ease;
+  }
+  .menu-ikona { position: relative; }
+  .menu-ikona::before, .menu-ikona::after { content: ""; position: absolute; left: 0; }
+  .menu-ikona::before { top: -6px; }
+  .menu-ikona::after { top: 6px; }
+  .menu-toggle[aria-expanded="true"] .menu-ikona { background: transparent; }
+  .menu-toggle[aria-expanded="true"] .menu-ikona::before { transform: translateY(6px) rotate(45deg); }
+  .menu-toggle[aria-expanded="true"] .menu-ikona::after { transform: translateY(-6px) rotate(-45deg); }
+
+  .js .nav-links {
+    display: none;
+    position: absolute; left: 0; right: 0; top: 100%;
+    width: auto; margin-top: 2px;
+    flex-direction: column; gap: 0;
+    background: var(--indigo);
+    padding: .4rem var(--pad) 1.4rem;
+    border-bottom: 4px solid var(--red);
+  }
+  .js .nav-links.is-open { display: flex; }
+  .js .nav-links a {
+    color: #fff; font-size: 1.2rem; font-weight: 600;
+    padding: .85rem 0; border-bottom: 1px solid rgba(255,255,255,.18);
+  }
+  .js .nav-links a:hover, .js .nav-links a:focus-visible { color: var(--yellow); }
+
   .team { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
   .avatar { max-width: 104px; }
   .avatar .initials { font-size: 1.3rem; }
@@ -346,4 +401,14 @@ footer img.logo { height: 52px; width: auto; }
   .sq-red, .ci-indigo { width: 48px; height: 48px; }
   .re-yellow { width: 72px; height: 24px; }
   .ci-green { width: 30px; height: 30px; }
+}
+
+/* nejuzsi telefony (320 px): at se hlavicka nezalomi */
+@media (max-width: 359px) {
+  .bar img { height: 24px; }
+  .bar, nav { gap: .5rem; }
+  nav .btn { padding: .55rem .6rem; font-size: .85rem; }
+  .js .menu-toggle { width: 38px; height: 38px; }
+  /* „zdarma" a „celá ČR" se velkym pismem do dvou sloupcu nevejdou */
+  .facts { grid-template-columns: 1fr; }
 }
