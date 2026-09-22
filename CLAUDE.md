@@ -118,6 +118,8 @@ Tohle na webu hlídej, jsou to chyby, které učitel pozná na první pohled:
 - **Pevná mezera** i po `č.` před číslem a mezi číslem a jednotkou (`3&nbsp;h`).
 - **České uvozovky** jsou `„takto“`, ne `"takto"`.
 - **Pomlčka** `–` s mezerami, ne spojovník `-`. Rozsahy bez mezer: `8.–9.`
+- **Řádek nikdy nesmí skončit číslovkou.** Číslo se váže pevnou mezerou
+  ke slovu za ním: `8.&nbsp;a&nbsp;9.&nbsp;třídy`, ne `8. a 9.` na konci řádku.
 - **Nadpis nesmí ztratit smysl zalomením.** Proto je v heru celá věta
   „Už v patnácti." svázaná pevnými mezerami.
 
