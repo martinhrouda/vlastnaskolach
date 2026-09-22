@@ -164,6 +164,12 @@
     box-shadow: inset 0 0 0 2px #d9d5ee;
   }
 
+  /* EU viditelnost — grantova povinnost, musi byt na kazde strance */
+  .eu-pata { margin-top: 40px; padding-top: 20px; border-top: 1px solid #e2e2ec; }
+  .eu-pata img { height: 34px; width: auto; display: block; margin-bottom: 12px; }
+  .eu-pata p { margin: 0 0 10px; font-size: .72rem; line-height: 1.5; color: #5a5a78; }
+  .eu-pata .cislo { font-size: .7rem; color: #8a8aa0; }
+
   /* stav "odchazim do hubu": pocitac, spusteni z plochy, navrat tlacitkem Hotovo */
   .odchod-obsah { display: none; }
   .odchod .instalace { display: none; }
@@ -173,7 +179,7 @@
 <body>
 <div class="wrap">
   <img class="logo" src="/assets/logo.png" alt="Vlast na školách" width="400" height="113">
-  <p class="kicker">Pro tým a lektory</p>
+  <p class="kicker">Pro tým a&nbsp;lektory</p>
 
   <div class="instalace">
     <h1>Týmový hub <em>do telefonu</em></h1>
@@ -188,20 +194,20 @@
          IgnoreManifestScope): otevre se pres celou obrazovku i na Sites
          a pri prihlaseni Google, bez okna s tlacitkem Hotovo. -->
     <div class="jen-ios">
-      <p class="poznamka jen-mimo-safari">Profil jde nainstalovat jen v Safari. Otevřete v něm adresu <b>www.vlastnaskolach.cz/hub</b>.</p>
+      <p class="poznamka jen-mimo-safari">Profil jde nainstalovat jen v&nbsp;Safari. Otevřete v&nbsp;něm adresu <b>www.vlastnaskolach.cz/hub</b>.</p>
       <ol class="kroky">
-        <li>Stáhněte profil a potvrďte <b>Povolit</b>
+        <li>Stáhněte profil a&nbsp;potvrďte <b>Povolit</b>
           <a class="tlacitko" href="/hub.mobileconfig">Stáhnout profil</a></li>
-        <li>Otevřete <b>Nastavení</b> a nahoře klepněte na <b>Profil stažen</b></li>
-        <li>Klepněte na <b>Instalovat</b>, zadejte kód telefonu a instalaci potvrďte<small>ikona hubu se pak objeví na ploše</small></li>
+        <li>Otevřete <b>Nastavení</b> a&nbsp;nahoře klepněte na <b>Profil stažen</b></li>
+        <li>Klepněte na <b>Instalovat</b>, zadejte kód telefonu a&nbsp;instalaci potvrďte<small>ikona hubu se pak objeví na ploše</small></li>
       </ol>
-      <p class="poznamka">Profil je podepsaný naší doménou <b>www.vlastnaskolach.cz</b>. Jen přidá ikonu, která otevře hub přes celou obrazovku, a nic jiného v telefonu nemění. Odebrat ho jde v Nastavení → Obecné → VPN a správa zařízení.</p>
+      <p class="poznamka">Profil je podepsaný naší doménou <b>www.vlastnaskolach.cz</b>. Jen přidá ikonu, která otevře hub přes celou obrazovku, a&nbsp;nic jiného v&nbsp;telefonu nemění. Odebrat ho jde v&nbsp;Nastavení → Obecné → VPN a&nbsp;správa zařízení.</p>
       <details class="jinak">
         <summary>Přidat bez profilu</summary>
         <ol class="kroky">
           <li>Klepněte na <b>Sdílet</b><small>čtvereček se šipkou nahoru; na nejnovějších iPhonech je pod tlačítkem&nbsp;⋯</small></li>
-          <li>Vyberte <b>Přidat na plochu</b><small>případně nejdřív sjeďte v nabídce níž</small></li>
-          <li>Potvrďte <b>Přidat</b><small>hub se pak otevře v okně s tlačítkem Hotovo</small></li>
+          <li>Vyberte <b>Přidat na plochu</b><small>případně nejdřív sjeďte v&nbsp;nabídce níž</small></li>
+          <li>Potvrďte <b>Přidat</b><small>hub se pak otevře v&nbsp;okně s&nbsp;tlačítkem Hotovo</small></li>
         </ol>
       </details>
     </div>
@@ -212,10 +218,10 @@
         <li>Vyberte <b>Přidat na plochu</b><small>na některých telefonech se jmenuje Instalovat aplikaci</small></li>
         <li>Potvrďte <b>Přidat</b></li>
       </ol>
-      <p class="poznamka">Po spuštění z plochy se hub otevře v okně s lištou a křížkem nahoře, to tak má být.</p>
+      <p class="poznamka">Po spuštění z&nbsp;plochy se hub otevře v&nbsp;okně s&nbsp;lištou a&nbsp;křížkem nahoře, to tak má být.</p>
     </div>
 
-    <p class="prihlaseni">Při prvním spuštění se přihlaste účtem Google, přes který jste v týmu.</p>
+    <p class="prihlaseni">Při prvním spuštění se přihlaste účtem Google, přes který jste v&nbsp;týmu.</p>
 
     <a class="tlacitko vedlejsi" href="https://sites.google.com/vlastnaskolach.cz/hub-iniciativa-vlast">Otevřít hub bez přidání</a>
   </div>
@@ -224,6 +230,12 @@
     <h1>Otevírám <em>hub</em>…</h1>
     <p class="uvod">Kdyby se neotevřel sám, klepněte níž.</p>
     <a class="tlacitko" href="https://sites.google.com/vlastnaskolach.cz/hub-iniciativa-vlast">Otevřít týmový hub</a>
+  </div>
+
+  <div class="eu-pata">
+    <img src="/assets/eu-barevne.svg" alt="Spolufinancováno Evropskou unií" width="943" height="245">
+    <p>Financováno Evropskou unií. Vyjádřené názory a&nbsp;stanoviska jsou názory a&nbsp;stanoviska autora nebo autorů a&nbsp;nemusí nutně odrážet názory a&nbsp;stanoviska Evropské unie nebo Domu zahraniční spolupráce. Evropská unie ani poskytovatel grantu za ně nenesou odpovědnost.</p>
+    <p class="cislo">Projekt č.&nbsp;2026-1-CZ01-ESC30-SOL-000404388 — Evropský sbor solidarity</p>
   </div>
 </div>
 </body>

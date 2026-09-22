@@ -52,9 +52,13 @@ Jako webfont ho na web nedávat. Co o něm víme (září 2026):
   produktů výslovně zakazuje, pro hru se nehodí.
 - Licence je na počet počítačů — stačí ten, na kterém vzniká grafika.
 
-Vizuální jazyk je bauhausový: kruhy a obdélníky, ostré hrany, hodně bílého
-prostoru, velká typografie. Žádné stíny, žádné gradienty, žádné zaoblené
-rohy kromě kruhů. Nové sekce drž v tomhle jazyce.
+Vizuální jazyk stojí na ostrých hranách, velké typografii a hodně bílého
+prostoru. Žádné stíny, žádné gradienty, žádné zaoblené rohy kromě kruhů.
+
+**Dekorativní geometrické tvary nepoužívat.** V heru byl pruh z červeného
+čtverce, modrého a zeleného kruhu a žlutého obdélníku — v brandingu Vlasti
+se takhle tvary nepoužívají, odstraněno 22. 9. 2026. Kruhy zůstávají jen
+tam, kde mají funkci (profilové fotky týmu).
 
 Web záměrně nemá fotky — použitelné fotografie z workshopů zatím neexistují.
 Až budou, patří do `assets/`.
@@ -95,6 +99,27 @@ Potom profil funguje dál, jen nové instalace ukážou „Neověřeno". Nový
 certifikát jde vydat jen přes záznam TXT `_acme-challenge.www` — výjimka
 z pravidla o DNS, jen se souhlasem a po vydání záznam smazat. Ověření
 souborem nejde, Vercel si `/.well-known/acme-challenge/` bere pro sebe.
+
+## Posuvný pás
+
+Mezi fakty a sekcí „O projektu" je `.pas` — vodorovný pruh s texty, který se
+při rolování posouvá doleva. Hýbe s ním skript na konci `index.html`: počítá,
+jak daleko je pruh při průchodu oknem, a podle toho nastaví `translate3d`.
+Posouvá se nejvýš o 38 % šířky stopy, takže zprava nikdy nedojde text —
+při změně počtu slov to ověř, stopa musí zůstat výrazně širší než okno.
+Respektuje `prefers-reduced-motion`; bez JS pruh jen stojí.
+
+## Typografie textů
+
+Tohle na webu hlídej, jsou to chyby, které učitel pozná na první pohled:
+
+- **Pevná mezera po jednopísmenných slovech** — `k s v z o u a i` (i velká)
+  nesmí zůstat na konci řádku. Píše se `v&nbsp;patnácti`, `8.&nbsp;a&nbsp;9.`
+- **Pevná mezera** i po `č.` před číslem a mezi číslem a jednotkou (`3&nbsp;h`).
+- **České uvozovky** jsou `„takto“`, ne `"takto"`.
+- **Pomlčka** `–` s mezerami, ne spojovník `-`. Rozsahy bez mezer: `8.–9.`
+- **Nadpis nesmí ztratit smysl zalomením.** Proto je v heru celá věta
+  „Už v patnácti." svázaná pevnými mezerami.
 
 ## Formulář
 

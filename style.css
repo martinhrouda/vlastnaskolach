@@ -164,20 +164,27 @@ section + section { border-top: 1px solid var(--line); }
 
 .hero-actions { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 2rem; }
 
-/* geometrie — bauhausový pruh */
-.shapes { display: flex; align-items: flex-end; gap: .75rem; margin-bottom: 2.5rem; height: 64px; }
-.shapes span { display: block; }
-.sq-red { width: 64px; height: 64px; background: var(--red); }
-.ci-indigo { width: 64px; height: 64px; border-radius: 50%; background: var(--indigo); }
-.re-yellow { width: 96px; height: 32px; background: var(--yellow); }
-.ci-green { width: 40px; height: 40px; border-radius: 50%; background: var(--green); }
-
 /* ---------- fakta ---------- */
 
 .facts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
 .fact { background: var(--paper); padding: 1.6rem 1.4rem; }
 .fact b { display: block; font-family: var(--display); font-size: 2.1rem; font-weight: 700; color: var(--indigo); line-height: 1; }
 .fact span { display: block; margin-top: .5rem; font-size: .9rem; color: var(--muted); }
+
+/* ---------- posuvny pas ---------- */
+
+/* Pri rolovani se stopa posouva doleva; hybe s ni skript na konci index.html.
+   Bez JS nebo pri omezenem pohybu zustane stat a je proste videt. */
+.pas { background: var(--indigo); overflow: hidden; padding: 1.5rem 0; border-top: none; }
+.pas-stopa {
+  display: flex; align-items: center; gap: 2.2rem;
+  width: max-content; white-space: nowrap; will-change: transform;
+}
+.pas span {
+  font-family: var(--display); font-weight: 700;
+  font-size: clamp(1.5rem, 3.6vw, 2.6rem); letter-spacing: -.02em; color: #fff;
+}
+.pas .pas-tecka { color: var(--yellow); }
 
 /* ---------- mřížky ---------- */
 
@@ -397,10 +404,6 @@ footer img.logo { height: 52px; width: auto; }
   .avatar { max-width: 104px; }
   .avatar .initials { font-size: 1.3rem; }
   .form .row { grid-template-columns: 1fr; }
-  .shapes { height: 48px; }
-  .sq-red, .ci-indigo { width: 48px; height: 48px; }
-  .re-yellow { width: 72px; height: 24px; }
-  .ci-green { width: 30px; height: 30px; }
 }
 
 /* nejuzsi telefony (320 px): at se hlavicka nezalomi */
