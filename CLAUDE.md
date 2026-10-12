@@ -128,6 +128,17 @@ Tohle na webu hlídej, jsou to chyby, které učitel pozná na první pohled:
 Přihláška jede přes **Web3Forms** — žádný backend. `access_key` je přímo
 v HTML (je to tak zamýšlené, není to tajemství).
 
+**Kam chodí přihlášky.** Od 12. 10. 2026 na skupinu `prihlasky@vlastnaskolach.cz`
+(členové Martin a Lena), dřív na `martin@`. Klíč se kvůli tomu neměnil —
+adresa je přepnutá v účtu Web3Forms, ne v kódu. Kdo má přihlášky dostávat,
+se proto řeší členstvím ve skupině, ne úpravou webu.
+
+Aby skupina přijala poštu od Web3Forms (`notify@web3forms.com` je adresa
+zvenčí domény), musí mít **„Kdo může přidávat příspěvky" = Kdokoli na webu**.
+Bez toho se zprávy tiše odrazí odesílateli a v týmu se o tom nikdo nedozví.
+Nový člen navíc musí mít odběr nastavený na **Každý e-mail**, jinak mu
+přihlášky nechodí, i když je ve skupině.
+
 Odesílá se přes `fetch` v inline skriptu na konci `index.html`. Po úspěchu
 se formulář skryje a odkryje se `#prihlaska-done`. Při chybě zůstane
 vyplněný, tlačítko se odemkne a ukáže se `#form-error`.
