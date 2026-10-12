@@ -139,6 +139,13 @@ Bez toho se zprávy tiše odrazí odesílateli a v týmu se o tom nikdo nedozví
 Nový člen navíc musí mít odběr nastavený na **Každý e-mail**, jinak mu
 přihlášky nechodí, i když je ve skupině.
 
+**`info@vlastnaskolach.cz` je alias téhle skupiny** (přidán 12. 10. 2026).
+Do té doby adresa **vůbec neexistovala** a pošta na ni se odrážela s chybou
+550 5.1.1, přestože ji web uvádí na pěti místech — v patičce, u přihlášky,
+v chybové hlášce formuláře a dvakrát v `gdpr.html` jako kontakt na správce
+údajů. Alias proto nerušit. Při podobné změně kontaktu vždy ověřit skutečným
+e-mailem, ne jen pohledem do konzole.
+
 Odesílá se přes `fetch` v inline skriptu na konci `index.html`. Po úspěchu
 se formulář skryje a odkryje se `#prihlaska-done`. Při chybě zůstane
 vyplněný, tlačítko se odemkne a ukáže se `#form-error`.
