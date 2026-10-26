@@ -1,13 +1,21 @@
 {
   "rewrites": [
     { "source": "/hub", "destination": "/hub.html" },
-    { "source": "/hub/", "destination": "/hub.html" }
+    { "source": "/hub/", "destination": "/hub.html" },
+    { "source": "/letak", "destination": "/index.html" },
+    { "source": "/letak/", "destination": "/index.html" }
   ],
   "headers": [
     {
       "source": "/hub.mobileconfig",
       "headers": [
         { "key": "Content-Type", "value": "application/x-apple-aspen-config" }
+      ]
+    },
+    {
+      "source": "/letak",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex" }
       ]
     }
   ]
