@@ -266,6 +266,7 @@ if (window.IntersectionObserver &&
       <form class="form" id="prihlaska-form" action="https://api.web3forms.com/submit" method="POST">
         <input type="hidden" name="access_key" value="788a6aea-ac4b-4a4a-b32d-e5facf6c73dd">
         <input type="hidden" name="subject" value="Nová přihláška školy — vlastnaskolach.cz">
+        <input type="hidden" name="zdroj" id="zdroj" value="">
         <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
 
         <div class="row">
@@ -478,10 +479,26 @@ if (window.IntersectionObserver &&
   var done = document.getElementById('prihlaska-done');
   var error = document.getElementById('form-error');
   var button = form.querySelector('button[type=submit]');
+  var zdroj = document.getElementById('zdroj');
+
+  /* Prvni adresa, pres kterou clovek na web prisel. Diky tomu je v e-mailu
+     s prihlaskou videt, jestli dorazil z QR kodu na letaku (/letak).
+     Drzi se v sessionStorage, aby prezila odskok na gdpr.html a zpet;
+     kdyz uloziste nejde (soukrome okno), pouzije se aktualni adresa. */
+  function zjistiZdroj() {
+    var ted = location.pathname + (document.referrer ? ' (z ' + document.referrer.replace(/^https?:\/\//, '').split('/')[0] + ')' : '');
+    try {
+      var ulozeny = sessionStorage.getItem('zdroj');
+      if (ulozeny) return ulozeny;
+      sessionStorage.setItem('zdroj', ted);
+    } catch (e) { /* uloziste neni, jede se bez nej */ }
+    return ted;
+  }
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     error.hidden = true;
+    if (zdroj) zdroj.value = zjistiZdroj();
     var label = button.textContent;
     button.disabled = true;
     button.textContent = 'Odesílám…';
